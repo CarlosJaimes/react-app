@@ -1,10 +1,59 @@
 // ./react-redux-client/src/actions/todoActions.js
 
 const apiUrl = "/api/";
+const apiUrlImage = "/api/upload";
 
 export const toggleAddBook = () => {
   return {
     type: 'TOGGLE_ADD_TODO'
+  }
+}
+
+export const addNewImage = (image) => {    
+
+  return (dispatch) => {
+    
+    dispatch(addNewImageRequest(image));
+        return fetch(apiUrlImage, {
+          method:'post',
+          body: image,
+    }).then(response => {
+
+      if(response.ok){
+        response.json().then(data => {
+          console.log(data.todo);
+          dispatch(addNewImageRequestSuccess(data.todo, data.message))
+        })
+      }
+      else{
+        response.json().then(error => {
+          dispatch(addNewImageRequestFailed(error))
+        })
+      }
+    })
+  }
+
+}
+
+export const addNewImageRequest = (image) => {
+  return {
+    type: 'ADD_NEW_TODO_REQUEST',
+    image
+  }
+}
+
+export const addNewImageRequestSuccess = (image,message) => {
+  return {
+    type: 'ADD_NEW_TODO_REQUEST_SUCCESS',
+    todo:image,
+    message:message
+  }
+}
+
+export const addNewImageRequestFailed = (error) => {
+  return {
+    type: 'ADD_NEW_TODO_REQUEST_FAILED',
+    error
   }
 }
 

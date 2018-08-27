@@ -16,5 +16,8 @@ router.route('/:id')
       .get(todoController.getTodo)
       .delete(todoController.deleteTodo);
 
+// router.route('/upload')
+//       .post(todoController.addImage);
+
 
 export default router;

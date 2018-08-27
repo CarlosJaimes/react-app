@@ -20,15 +20,29 @@ export default class App extends React.Component {
   }
 
 
+  // addImage(e){
+  //   e.preventDefault();
+
+  //   const data = new FormData();
+
+  //   this.props.mappedAddImage(data)
+  // }
+
   addTodo(e){
       e.preventDefault();      
       
-      const form = document.getElementById('addTodoForm');
+      const form = document.getElementById('addTodoForm');      
 
-      alert(form.fileImput.files[0] + " " + form.fileImput.value)
+      const data = new FormData();      
+
+      data.append('file', form.uploadInput.files[0]);
+      data.append('imageName', form.fileName.value);      
+
+      this.props.mappedAddImage(data);
+
 
       // Validate VIM # 
-      if(form.vimNumber.value !== "" && form.vimNumber.value.trim().length == 2){
+      if(form.vimNumber.value !== "" && form.vimNumber.value.trim().length >= 2){
         
         const data = new FormData();
                 
