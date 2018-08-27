@@ -102,12 +102,12 @@ const TodoForm = (props) => {
           <FormGroup>
             <ControlLabel>File</ControlLabel>
               <FormControl
-                type="file" name="fileImput" ref={(ref) => { this.fileName = ref; }}
+                type="file" name="uploadInput" 
               />              
           </FormGroup>
+          {/* <input ref={(ref) => { uploadInput = ref; }} type="file" name="uploadInput"/>           */}
         </div>       
-
-        
+         
 
 
         <div className="col-md-12">

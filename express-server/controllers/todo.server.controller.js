@@ -14,6 +14,23 @@ export const getTodos = (req,res) => {
   });
 }
 
+export const addImage = (req,res) => {
+
+  console.log("sirveeee perrita")
+
+  console.log(req.body);  
+
+  // const newTodo = new Todo(req.body);
+  
+  // newTodo.save((err,todo) => {
+  //   if(err){
+  //   return res.json({'success':false,'message':'Some Error'});
+  //   }
+
+  //   return res.json({'success':true,'message':'Todo added successfully',todo});
+  // })
+}
+
 export const addTodo = (req,res) => {
   console.log(req.body);
   const newTodo = new Todo(req.body);

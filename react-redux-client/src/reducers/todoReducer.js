@@ -98,6 +98,61 @@ export  const todoReducer = (currentState = INITIAL_STATE, action) => {
             todoToEdit: null,
           }
 
+
+
+          
+
+    case 'ADD_NEW_IMAGE_REQUEST':
+          return {
+            ...currentState,
+            todos:currentState.todos,
+            todo:null,
+            isFetching: true,
+            error: null,
+            successMsg:null,
+            showDeleteModal: false,
+            todoToDelete: null,
+            showEditModal: false,
+            todoToEdit: null,
+            newTodo: action.todo
+          }
+
+    case 'ADD_NEW_IMAGE_REQUEST_FAILED':
+          return {
+            ...currentState,
+            todos:currentState.todos,
+            todo:null,
+            isFetching: true,
+            error: action.error,
+            successMsg:null,
+            showDeleteModal: false,
+            todoToDelete: null,
+            showEditModal: false,
+            todoToEdit: null,
+            newTodo: null
+          }
+
+    case 'ADD_NEW_IMAGE_REQUEST_SUCCESS':
+          const nextStateImage =  {
+            ...currentState,
+            todos:[...currentState.todos, action.todo],
+            todo:null,
+            isFetching: false,
+            error: null,
+            successMsg:action.message,
+            showDeleteModal: false,
+            todoToDelete: null,
+            showEditModal: false,
+            todoToEdit: null,
+            newTodo: action.todo
+          }
+        return nextStateImage;
+
+
+
+
+        
+
     case 'ADD_NEW_TODO_REQUEST':
           return {
             ...currentState,
