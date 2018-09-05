@@ -5,9 +5,10 @@ import bodyParser from 'body-parser';
 import logger from 'morgan';
 import mongoose from 'mongoose';
 import SourceMapSupport from 'source-map-support';
-import bb from 'express-busboy';
 import fileUpload from 'express-fileupload';
 import cors from 'cors';
+
+import bb from 'express-busboy';
 
 // import routes
 import todoRoutes from './routes/todo.server.route';
@@ -15,8 +16,10 @@ import todoRoutes from './routes/todo.server.route';
 // define our app using express
 const app = express();
 
+
+const frontEndDir = '/Users/Carlos/Repositorios/ReactApp/react-redux-client/public'
 // express-busboy to parse multipart/form-data
-bb.extend(app);
+// bb.extend(app);
 
 // allow-cors
 app.use(function(req,res,next){
@@ -25,6 +28,8 @@ app.use(function(req,res,next){
   next();
 })
 
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
 
 // configure app
 app.use(logger('dev'));
@@ -32,7 +37,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended:true }));
 app.use(cors());
 app.use(fileUpload());
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
+// app.use('/', express.static(__dirname + '/public')); 
+app.use('/public', express.static(__dirname + '/public'));
 
 
 // set the port
@@ -47,33 +54,60 @@ mongoose.connect('mongodb://localhost/TLR-APP', {
 // add Source Map Support
 SourceMapSupport.install();
 
+
+
+// API Routes
 app.use('/api', todoRoutes);
 
+
+
+// API Upload images
+app.post('/api/upload', (req,res) => {
+
+  if (!req.files) {
+    console.log(req.files)    
+    return res.status(400).send('No files were uploaded.');
+  }        
+
+  var file;
+  var fileExtension;
+  var i = 0  
+  
+  var pathArray = []
+
+  for (var key in req.files) {    
+    
+    file = req.files[key];
+    fileExtension = file.name.split('.').pop();         
+
+    //file.mv(`${__dirname}/public/${req.body.filename[i]}.${fileExtension}`, function(err) {
+    file.mv(`/Users/Carlos/Repositorios/ReactApp/react-redux-client/public/${req.body.filename[i]}.${fileExtension}`, function(err) {
+    
+      if (err) {
+        console.log(err);
+        console.log(file)
+        return res.status(500).send(err);
+      }
+      
+      console.log('File uploaded!');             
+      
+    });
+
+    //pathArray.push(`${__dirname}/public/${req.body.filename[i]}.${fileExtension}`)
+    pathArray.push(`${req.body.filename[i]}.${fileExtension}`)    
+
+    i = i + 1
+  }
+
+  return res.json({'success':true,'message':'File added successfully',pathArray});      
+
+});
+  
+
+// API Main
 app.get('/', (req,res) => {
   return res.end('Api working');
 })
-
-app.post('/api/upload', (req,res) => {
-
-  console.log("Funcionaa")
-  console.log(req.body)
-
-  // if (!req.files) {
-  //   console.log(req.files)
-  //   return res.status(400).send('No files were uploaded.');
-  // }    
- 
-  // // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
-  // let sampleFile = req.files.file;
- 
-  // // Use the mv() method to place the file somewhere on your server
-  // sampleFile.mv('/somewhere/on/your/server/filename.jpg', function(err) {
-  //   if (err)
-  //     return res.status(500).send(err);
- 
-  //   res.send('File uploaded!');
-  // });
-}) 
 
 
 // catch 404

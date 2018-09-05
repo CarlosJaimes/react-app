@@ -4,12 +4,14 @@ import { FormGroup,ControlLabel,FormControl,Button,DropdownButton,MenuItem } fro
 
 const TodoForm = (props) => {
   return (
-    <form className="form form-horizontal" id="addTodoForm" onSubmit={props.addTodo}>
+    <form className="form form-horizontal" id="addTodoForm" onSubmit={props.addTodo} enctype="multipart/form-data">
       
       <div className="row">
 
         <h3 className="centerAlign">Add New Item</h3>
 
+
+    {/*  */}
 
         {/* CUSTOMER NAME */}
         <div className="col-md-12">
@@ -97,25 +99,38 @@ const TodoForm = (props) => {
         </div>
 
 
-
-        <div className="col-md-12">
+        {/* File 1 */}
+        <div className="col-md-4">        
+        <input id="uploadFile" type="file" name="uploadFile" />        
           <FormGroup>
-            <ControlLabel>File</ControlLabel>
-              <FormControl
-                type="file" name="uploadInput" 
-              />              
-          </FormGroup>
-          {/* <input ref={(ref) => { uploadInput = ref; }} type="file" name="uploadInput"/>           */}
-        </div>       
-         
-
-
-        <div className="col-md-12">
-          <FormGroup>
-            <ControlLabel>File Name: </ControlLabel>
+            <ControlLabel>File Name 1: </ControlLabel>
               <FormControl
                 type="text" placeholder="Enter File Name"
-                name="fileName" 
+                name="fileName1" 
+              />              
+          </FormGroup>
+        </div>
+
+        {/* File 2 */}
+        <div className="col-md-4">        
+        <input id="uploadFile2" type="file" name="uploadFile2" />        
+          <FormGroup>
+            <ControlLabel>File Name 2: </ControlLabel>
+              <FormControl
+                type="text" placeholder="Enter File Name"
+                name="fileName2" 
+              />              
+          </FormGroup>
+        </div>
+
+        {/* File 3 */}
+        <div className="col-md-4">        
+        <input id="uploadFile3" type="file" name="uploadFile3" />        
+          <FormGroup>
+            <ControlLabel>File Name 3: </ControlLabel>
+              <FormControl
+                type="text" placeholder="Enter File Name"
+                name="fileName3" 
               />              
           </FormGroup>
         </div>

@@ -14,21 +14,23 @@ export const getTodos = (req,res) => {
   });
 }
 
-export const addImage = (req,res) => {
+export const addImage = (req, res, next)  => {
 
-  console.log("sirveeee perrita")
+  if (!req.files) {
+    console.log(req.files)    
+    return res.status(400).send('No files were uploaded.');
+  }    
+ 
+  let imageFile = req.files.file;    
 
-  console.log(req.body);  
+  imageFile.mv(`${__dirname}/public/${req.body.filename}.jpg`, function(err) {
+    if (err) {
+      console.log(imageFile)
+      return res.status(500).send(err);
+    }
 
-  // const newTodo = new Todo(req.body);
-  
-  // newTodo.save((err,todo) => {
-  //   if(err){
-  //   return res.json({'success':false,'message':'Some Error'});
-  //   }
-
-  //   return res.json({'success':true,'message':'Todo added successfully',todo});
-  // })
+    res.json({file: `public/${req.body.filename}.jpg`});
+  });
 }
 
 export const addTodo = (req,res) => {

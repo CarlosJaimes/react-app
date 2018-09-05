@@ -12,6 +12,7 @@ export default class App extends React.Component {
     
     this.toggleAddTodo = this.toggleAddTodo.bind(this);
     this.addTodo = this.addTodo.bind(this);
+    this.addImage = this.addImage.bind(this);    
   }
 
   toggleAddTodo(e){
@@ -20,47 +21,77 @@ export default class App extends React.Component {
   }
 
 
-  // addImage(e){
-  //   e.preventDefault();
+  addImage(stringData){        
 
-  //   const data = new FormData();
+    const form = document.getElementById('addTodoForm');   
+    
+    const formData = new FormData();    
+    var emptyFile = true
+    var emptyFile2 = true
+    var emptyFile3 = true    
 
-  //   this.props.mappedAddImage(data)
-  // }
+    if(form.uploadFile.files[0] != null) {             
+      formData.append("file", form.uploadFile.files[0]);
+      formData.append('filename', form.fileName1.value);    
+      emptyFile = false      
+    }        
+
+    if(form.uploadFile2.files[0] != null) {            
+      formData.append("file2", form.uploadFile2.files[0]);
+      formData.append('filename', form.fileName2.value);    
+      emptyFile2 = false      
+    }
+
+    if(form.uploadFile3.files[0] != null) {            
+      formData.append("file3", form.uploadFile3.files[0]);
+      formData.append('filename3', form.fileName3.value);    
+      emptyFile3 = false      
+    }
+
+    if(!emptyFile || !emptyFile2 || !emptyFile3) {                
+      this.props.mappedAddImage(formData,stringData)   
+      
+      //alert(stringData)
+    
+    } else {      
+      this.props.mappedAddTodo(stringData);
+    }
+    
+
+  }
 
   addTodo(e){
       e.preventDefault();      
       
-      const form = document.getElementById('addTodoForm');      
-
-      const data = new FormData();      
-
-      data.append('file', form.uploadInput.files[0]);
-      data.append('imageName', form.fileName.value);      
-
-      this.props.mappedAddImage(data);
-
+      const form = document.getElementById('addTodoForm');                
 
       // Validate VIM # 
       if(form.vimNumber.value !== "" && form.vimNumber.value.trim().length >= 2){
         
-        const data = new FormData();
+        const stringData = new FormData();
                 
-        data.append('vimNumber', form.vimNumber.value.trim().toUpperCase());
-        data.append('customerName', form.customerName.value.toUpperCase());
-        data.append('carMake', form.carMake.value.toUpperCase());
-        data.append('carModel', form.carModel.value.toUpperCase());
-        data.append('carYear', form.carYear.value);
-        data.append('keyType', form.keyType.value.toUpperCase());
-        data.append('transponderType', form.transponderType.value.toUpperCase());
-        data.append('description', form.description.value);        
+        stringData.append('vimNumber', form.vimNumber.value.trim().toUpperCase());
+        stringData.append('customerName', form.customerName.value.toUpperCase());
+        stringData.append('carMake', form.carMake.value.toUpperCase());
+        stringData.append('carModel', form.carModel.value.toUpperCase());
+        stringData.append('carYear', form.carYear.value);
+        stringData.append('keyType', form.keyType.value.toUpperCase());
+        stringData.append('transponderType', form.transponderType.value.toUpperCase());
+        stringData.append('description', form.description.value);
+        stringData.append('filename1', form.fileName1.value);
+        stringData.append('filename2', form.fileName2.value);
+        stringData.append('filename3', form.fileName3.value);
+        
+
         
         // const data = {
         //   todoText: form.todoText.value,
         //   todoDesc: form.todoDesc.value
         // }
 
-        this.props.mappedAddTodo(data);
+        //this.props.mappedAddTodo(stringData);
+
+        this.addImage(stringData)  
 
       form.reset();
       }
@@ -97,7 +128,7 @@ export default class App extends React.Component {
   <div className="container">
 
   {appState.showAddTodo &&
-    <TodoForm addTodo={this.addTodo} />
+    <TodoForm addTodo={this.addTodo} addImage={this.addImage.bind(this)}/>
   }
 
   { /* Each Smaller Components */}
