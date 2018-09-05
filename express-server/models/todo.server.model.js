@@ -12,7 +12,13 @@ var Schema = mongoose.Schema({
   carYear: Number,
   keyType: String,
   transponderType: String,    
-  description: String
+  description: String,
+  filename1: String,
+  filename2: String,
+  filename3: String,
+  path1: String,
+  path2: String,
+  path3: String
 });
 
 export default mongoose.model('Todo', Schema);

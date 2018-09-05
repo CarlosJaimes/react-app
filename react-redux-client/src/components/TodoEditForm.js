@@ -1,6 +1,6 @@
 // ./react-redux-client/src/components/TodoEditForm.js
 import React from 'react';
-import { FormGroup,ControlLabel,FormControl,Button } from 'react-bootstrap';
+import { FormGroup,ControlLabel,FormControl,Button, Media} from 'react-bootstrap';
 
 const TodoEditForm = (props) => {
   return (
@@ -92,6 +92,21 @@ const TodoEditForm = (props) => {
                 type="text" placeholder="Enter Transponder Type"
                 name="transponderType" defaultValue={props.todoData.transponderType}
               />              
+          </FormGroup>
+        </div>
+
+        <div className="col-md-4">
+          <FormGroup>
+            <ControlLabel>Images 1: </ControlLabel>
+            <img src={"/" + props.todoData.path1} height="200" width="200"/>
+          </FormGroup>
+          <FormGroup>
+            <ControlLabel>Images 2: </ControlLabel>
+            <img src={"/" + props.todoData.path2} height="200" width="200"/>
+          </FormGroup>
+          <FormGroup>
+            <ControlLabel>Images 3: </ControlLabel>
+            <img src={"/" + props.todoData.path3} height="200" width="200"/>
           </FormGroup>
         </div>
 

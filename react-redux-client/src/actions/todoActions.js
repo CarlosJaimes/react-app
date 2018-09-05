@@ -9,42 +9,54 @@ export const toggleAddBook = () => {
   }
 }
 
-export const addNewImage = (image) => {    
+export const addNewImage = (imageData,stringData) => {      
 
   return (dispatch) => {
     
-    dispatch(addNewImageRequest(image));
-        return fetch(apiUrlImage, {
-          method:'post',
-          body: image,
+    dispatch(addNewImageRequest(imageData));
+    return fetch(apiUrlImage, {
+      method:'POST',
+      body: imageData,
     }).then(response => {
-
+  
       if(response.ok){
         response.json().then(data => {
-          console.log(data.todo);
-          dispatch(addNewImageRequestSuccess(data.todo, data.message))
+          
+          console.log(data);                    
+
+          // If server response ok the images are saved then save the path
+          stringData.append('path1', data.pathArray[0]);
+          stringData.append('path2', data.pathArray[1]);
+          stringData.append('path3', data.pathArray[2]);
+
+          dispatch(addNewTodo(stringData));
+
+          // dispatch(addNewImageRequestSuccess(data.todo, data.message))
+          
         })
       }
       else{
         response.json().then(error => {
-          dispatch(addNewImageRequestFailed(error))
+          //dispatch(addNewImageRequestFailed(error))
         })
       }
     })
+
   }
 
+  
 }
 
 export const addNewImageRequest = (image) => {
   return {
-    type: 'ADD_NEW_TODO_REQUEST',
+    type: 'ADD_NEW_IMAGE_REQUEST',
     image
   }
 }
 
 export const addNewImageRequestSuccess = (image,message) => {
   return {
-    type: 'ADD_NEW_TODO_REQUEST_SUCCESS',
+    type: 'ADD_NEW_IMAGE_REQUEST_SUCCESS',
     todo:image,
     message:message
   }
@@ -52,7 +64,7 @@ export const addNewImageRequestSuccess = (image,message) => {
 
 export const addNewImageRequestFailed = (error) => {
   return {
-    type: 'ADD_NEW_TODO_REQUEST_FAILED',
+    type: 'ADD_NEW_IMAGE_REQUEST_FAILED',
     error
   }
 }

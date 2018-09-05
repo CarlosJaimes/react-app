@@ -18,7 +18,7 @@ const mapDispatchToProps = (dispatch) => {
     //you can now say this.props.mappedAppActions
     mappedToggleAddTodo: () => dispatch(appActions.toggleAddTodo()),
     mappedAddTodo: todo => dispatch(todoActions.addNewTodo(todo)),
-    mappedAddImage: image => dispatch(todoActions.addNewImage(image))
+    mappedAddImage: (imageData,stringData) => dispatch(todoActions.addNewImage(imageData,stringData))
   }
 }
 
