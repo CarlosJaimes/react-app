@@ -9,7 +9,7 @@ var Schema = mongoose.Schema({
   customerName: String,  
   carMake: String,
   carModel: String,
-  carYear: Number,
+  carYear: String,
   keyType: String,
   transponderType: String,    
   description: String,
