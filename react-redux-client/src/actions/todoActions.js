@@ -31,7 +31,7 @@ export const addNewImage = (imageData,stringData) => {
 
           dispatch(addNewTodo(stringData));
 
-          // dispatch(addNewImageRequestSuccess(data.todo, data.message))
+          //dispatch(addNewImageRequestSuccess(data.todo, data.message))
           
         })
       }

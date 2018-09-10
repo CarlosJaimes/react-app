@@ -44,14 +44,12 @@ export default class App extends React.Component {
 
     if(form.uploadFile3.files[0] != null) {            
       formData.append("file3", form.uploadFile3.files[0]);
-      formData.append('filename3', form.fileName3.value);    
+      formData.append('filename', form.fileName3.value);    
       emptyFile3 = false      
     }
 
     if(!emptyFile || !emptyFile2 || !emptyFile3) {                
-      this.props.mappedAddImage(formData,stringData)   
-      
-      //alert(stringData)
+      this.props.mappedAddImage(formData,stringData)               
     
     } else {      
       this.props.mappedAddTodo(stringData);
@@ -80,16 +78,7 @@ export default class App extends React.Component {
         stringData.append('description', form.description.value);
         stringData.append('filename1', form.fileName1.value);
         stringData.append('filename2', form.fileName2.value);
-        stringData.append('filename3', form.fileName3.value);
-        
-
-        
-        // const data = {
-        //   todoText: form.todoText.value,
-        //   todoDesc: form.todoDesc.value
-        // }
-
-        //this.props.mappedAddTodo(stringData);
+        stringData.append('filename3', form.fileName3.value);                        
 
         this.addImage(stringData)  
 
