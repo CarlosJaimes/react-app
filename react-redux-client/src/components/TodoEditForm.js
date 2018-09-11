@@ -95,20 +95,26 @@ const TodoEditForm = (props) => {
           </FormGroup>
         </div>
 
-        <div className="col-md-4">
-          <FormGroup>
-            <ControlLabel>Images 1: </ControlLabel>
-            <img src={"/" + props.todoData.path1} height="200" width="200"/>
-          </FormGroup>
-          <FormGroup>
-            <ControlLabel>Images 2: </ControlLabel>
-            <img src={"/" + props.todoData.path2} height="200" width="200"/>
-          </FormGroup>
-          <FormGroup>
-            <ControlLabel>Images 3: </ControlLabel>
-            <img src={"/" + props.todoData.path3} height="200" width="200"/>
-          </FormGroup>
+        <hr/> 
+
+        {/* File 1 */}
+        <div className="col-md-4">        
+          <ControlLabel>File 1 </ControlLabel>
+          <input id="uploadFile" type="file" name="uploadFile" />        
         </div>
+
+        {/* File 2 */}
+        <div className="col-md-4">        
+          <ControlLabel>File 2 </ControlLabel>
+          <input id="uploadFile2" type="file" name="uploadFile2" />                  
+        </div>
+
+        {/* File 3 */}
+        <div className="col-md-4">        
+          <ControlLabel>File 3 </ControlLabel>
+          <input id="uploadFile3" type="file" name="uploadFile3" />                  
+        </div>
+
 
 
         <div className="col-md-12">

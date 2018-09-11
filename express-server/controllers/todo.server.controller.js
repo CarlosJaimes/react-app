@@ -1,5 +1,6 @@
 // ./express-server/controllers/todo.server.controller.js
 import mongoose from 'mongoose';
+import rimraf from 'rimraf';
 
 //import models
 import Todo from '../models/todo.server.model';
@@ -75,6 +76,17 @@ export const deleteTodo = (req,res) => {
     return res.json({'success':false,'message':'Some Error'});
     }
 
-    return res.json({'success':true,'message':todo.todoText+' deleted successfully'});
+    //Delete customer VIM # folder files
+    var dir = `/Users/Carlos/Repositorios/ReactApp/react-redux-client/public/${todo.vimNumber}/`;    
+
+    rimraf(dir, function (error) { 
+      if (error) {
+        console.log(error)
+      } else {
+        console.log('done'); 
+      }    
+    });
+
+    return res.json({'success':true,'message':todo.todoText+' deleted successfully',todo});
   })
 }

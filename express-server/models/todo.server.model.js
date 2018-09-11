@@ -13,9 +13,6 @@ var Schema = mongoose.Schema({
   keyType: String,
   transponderType: String,    
   description: String,
-  filename1: String,
-  filename2: String,
-  filename3: String,
   path1: String,
   path2: String,
   path3: String

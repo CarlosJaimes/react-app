@@ -23,10 +23,50 @@ export default class Todo extends React.Component {
 
         {todoState.todo && !todoState.isFetching &&
           <div>
-            <h3>{todoState.todo.vimNumber}</h3>
-            <hr />
+            <h2>VIM #: {todoState.todo.vimNumber}</h2>
+            <hr/>                        
+            <h3>Customer Name</h3>
+            <p>{todoState.todo.customerName}</p>
+
+            <h3>Car Make</h3>
+            <p>{todoState.todo.carMake}</p>
+
+            <h3>Car Model</h3>
+            <p>{todoState.todo.carModel}</p>
+
+            <h3>Car Year</h3>
+            <p>{todoState.todo.carYear}</p>
+
+            <h3>Key Type</h3>
+            <p>{todoState.todo.keyType}</p>
+
+            <h3>Transponder Type</h3>            
+            <p>{todoState.todo.transponderType}</p>
+
+            <h3>Description</h3>            
             <p>{todoState.todo.description}</p>
-          </div>
+
+            <hr/>          
+            <h2>Files</h2>
+
+            {todoState.todo.path1 != 'undefined' &&
+            <img src={"/" + todoState.todo.path1} height="200" width="200"/>
+            }
+
+
+            {todoState.todo.path2 != 'undefined' &&
+            <img src={"/" + todoState.todo.path2} height="200" width="200"/>
+            }
+
+
+            {todoState.todo.path3 != 'undefined' &&
+            <img src={"/" + todoState.todo.path3} height="200" width="200"/>
+            }
+
+            <hr/>           
+
+          </div>                    
+
         }
         
       </div>

@@ -70,18 +70,29 @@ app.post('/api/upload', (req,res) => {
   }        
 
   var file;
-  var fileExtension;
+  var fileExtension;  
   var i = 0  
   
-  var pathArray = []
+  let customerVIM = req.body.vimNumber
 
+  var pathArray = []  
+
+  //Create folder to customer VIM# files
+  var fs = require('fs');
+  var dir = `/Users/Carlos/Repositorios/ReactApp/react-redux-client/public/${customerVIM}/`;
+
+  if (!fs.existsSync(dir)){
+      fs.mkdirSync(dir);
+  }  
+
+  //Loop for files
   for (var key in req.files) {    
     
     file = req.files[key];
     fileExtension = file.name.split('.').pop();         
 
     //file.mv(`${__dirname}/public/${req.body.filename[i]}.${fileExtension}`, function(err) {
-    file.mv(`/Users/Carlos/Repositorios/ReactApp/react-redux-client/public/${req.body.filename[i]}.${fileExtension}`, function(err) {
+    file.mv(`/Users/Carlos/Repositorios/ReactApp/react-redux-client/public/${customerVIM}/${req.body.filename[i]}.${fileExtension}`, function(err) {
     
       if (err) {
         console.log(err);
@@ -94,7 +105,7 @@ app.post('/api/upload', (req,res) => {
     });
 
     //pathArray.push(`${__dirname}/public/${req.body.filename[i]}.${fileExtension}`)
-    pathArray.push(`${req.body.filename[i]}.${fileExtension}`)    
+    pathArray.push(`${customerVIM}/${req.body.filename[i]}.${fileExtension}`)    
 
     i = i + 1
   }

@@ -32,23 +32,27 @@ export default class App extends React.Component {
 
     if(form.uploadFile.files[0] != null) {             
       formData.append("file", form.uploadFile.files[0]);
-      formData.append('filename', form.fileName1.value);    
+      formData.append('filename', "file1");        
       emptyFile = false      
     }        
 
     if(form.uploadFile2.files[0] != null) {            
       formData.append("file2", form.uploadFile2.files[0]);
-      formData.append('filename', form.fileName2.value);    
+      formData.append('filename', "file2");    
       emptyFile2 = false      
     }
 
     if(form.uploadFile3.files[0] != null) {            
       formData.append("file3", form.uploadFile3.files[0]);
-      formData.append('filename', form.fileName3.value);    
+      formData.append('filename', "file3");    
       emptyFile3 = false      
     }
 
-    if(!emptyFile || !emptyFile2 || !emptyFile3) {                
+    if(!emptyFile || !emptyFile2 || !emptyFile3) {   
+      
+      //Customer VIM # 
+      formData.append('vimNumber', form.vimNumber.value.trim().toUpperCase());             
+      
       this.props.mappedAddImage(formData,stringData)               
     
     } else {      
@@ -75,10 +79,7 @@ export default class App extends React.Component {
         stringData.append('carYear', form.carYear.value);
         stringData.append('keyType', form.keyType.value.toUpperCase());
         stringData.append('transponderType', form.transponderType.value.toUpperCase());
-        stringData.append('description', form.description.value);
-        stringData.append('filename1', form.fileName1.value);
-        stringData.append('filename2', form.fileName2.value);
-        stringData.append('filename3', form.fileName3.value);                        
+        stringData.append('description', form.description.value);                                
 
         this.addImage(stringData)  
 
