@@ -37,11 +37,17 @@ export default class Todo extends React.Component {
             <h3>Car Year</h3>
             <p>{todoState.todo.carYear}</p>
 
-            <h3>Key Type</h3>
+            <h3>Key</h3>
             <p>{todoState.todo.keyType}</p>
 
-            <h3>Transponder Type</h3>            
+            <h3>Transponder</h3>            
             <p>{todoState.todo.transponderType}</p>
+            
+            <h3>PIN #</h3>            
+            <p>{todoState.todo.pinNumber}</p>
+
+            <h3>Key Code</h3>            
+            <p>{todoState.todo.keyCode}</p>
 
             <h3>Description</h3>            
             <p>{todoState.todo.description}</p>

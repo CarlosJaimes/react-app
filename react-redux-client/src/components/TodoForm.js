@@ -31,7 +31,7 @@ const TodoForm = (props) => {
             <ControlLabel>VIM #: </ControlLabel>
               <FormControl
                 type="text" placeholder="Enter VIM #"
-                name="vimNumber"
+                name="vimNumber" maxlength="17"
               />              
           </FormGroup>
         </div>                        
@@ -40,7 +40,7 @@ const TodoForm = (props) => {
         {/* MAKE # */}
         <div className="col-md-4">
             <FormGroup>
-              <ControlLabel>Car Make: </ControlLabel>
+              <ControlLabel>Make: </ControlLabel>
                 <FormControl
                   type="text" placeholder="Enter Car Make"
                   name="carMake"
@@ -52,7 +52,7 @@ const TodoForm = (props) => {
           {/* MODEL # */}
           <div className="col-md-4">
             <FormGroup>
-              <ControlLabel>Car Model: </ControlLabel>
+              <ControlLabel>Model: </ControlLabel>
                 <FormControl
                   type="text" placeholder="Enter Car Model"
                   name="carModel"
@@ -65,7 +65,7 @@ const TodoForm = (props) => {
           {/* YEAR # */}
           <div className="col-md-4">
             <FormGroup>
-              <ControlLabel>Car Year: </ControlLabel>
+              <ControlLabel>Year: </ControlLabel>
                 <FormControl
                   type="text" placeholder="Enter Car Year"
                   name="carYear"
@@ -75,9 +75,9 @@ const TodoForm = (props) => {
 
 
         {/* Key Type */}
-        <div className="col-md-12">
+        <div className="col-md-6">
           <FormGroup>
-            <ControlLabel>Key Type: </ControlLabel>
+            <ControlLabel>Key: </ControlLabel>
               <FormControl
                 type="text" placeholder="Enter Key Type"
                 name="keyType"
@@ -88,9 +88,9 @@ const TodoForm = (props) => {
 
 
         {/* Transponder Type */}
-        <div className="col-md-12">
+        <div className="col-md-6">
           <FormGroup>
-            <ControlLabel>Transponder Type : </ControlLabel>
+            <ControlLabel>Transponder: </ControlLabel>
               <FormControl
                 type="text" placeholder="Enter Transponder Type"
                 name="transponderType"
@@ -98,23 +98,46 @@ const TodoForm = (props) => {
           </FormGroup>
         </div>
 
+        {/* Pin #*/}
+        <div className="col-md-6">
+          <FormGroup>
+            <ControlLabel>PIN #:</ControlLabel>
+              <FormControl
+                type="text" placeholder="Enter PIN Number"
+                name="pinNumber"
+              />              
+          </FormGroup>
+        </div>
+
+        {/* Key Code #*/}
+        <div className="col-md-6">
+          <FormGroup>
+            <ControlLabel>Key Code: </ControlLabel>
+              <FormControl
+                type="text" placeholder="Enter Key Code"
+                name="keyCode"
+              />              
+          </FormGroup>
+        </div>
+
+        <hr/> 
 
         {/* File 1 */}
         <div className="col-md-4">        
-        <ControlLabel>File 1 </ControlLabel>
-        <input id="uploadFile" type="file" name="uploadFile" />        
+          <ControlLabel>Image</ControlLabel>
+          <input id="uploadFile" type="file" name="uploadFile" />        
         </div>
 
         {/* File 2 */}
         <div className="col-md-4">        
-        <ControlLabel>File 2 </ControlLabel>
-        <input id="uploadFile2" type="file" name="uploadFile2" />                  
+          <ControlLabel>Module Location</ControlLabel>
+          <input id="uploadFile2" type="file" name="uploadFile2" />                  
         </div>
 
         {/* File 3 */}
         <div className="col-md-4">        
-        <ControlLabel>File 3 </ControlLabel>
-        <input id="uploadFile3" type="file" name="uploadFile3" />                  
+          <ControlLabel>BIM File</ControlLabel>
+          <input id="uploadFile3" type="file" name="uploadFile3" />                  
         </div>
 
 

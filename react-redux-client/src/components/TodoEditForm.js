@@ -27,7 +27,7 @@ const TodoEditForm = (props) => {
             <ControlLabel>VIM #: </ControlLabel>
               <input type="hidden" value={props.todoData._id} name="id"/>
               <FormControl
-                type="text" placeholder="Enter VIM #"
+                type="text" placeholder="Enter VIM #" maxlength="17"
                 name="vimNumber" defaultValue={props.todoData.vimNumber}
               />        
           </FormGroup>
@@ -37,7 +37,7 @@ const TodoEditForm = (props) => {
         {/* MAKE # */}
         <div className="col-md-4">
             <FormGroup>
-              <ControlLabel>Car Make: </ControlLabel>
+              <ControlLabel>Make: </ControlLabel>
                 <FormControl
                   type="text" placeholder="Enter Car Make"
                   name="carMake" defaultValue={props.todoData.carMake}
@@ -49,7 +49,7 @@ const TodoEditForm = (props) => {
           {/* MODEL # */}
           <div className="col-md-4">
             <FormGroup>
-              <ControlLabel>Car Model: </ControlLabel>
+              <ControlLabel>Model: </ControlLabel>
                 <FormControl
                   type="text" placeholder="Enter Car Model"
                   name="carModel" defaultValue={props.todoData.carModel}
@@ -62,7 +62,7 @@ const TodoEditForm = (props) => {
           {/* YEAR # */}
           <div className="col-md-4">
             <FormGroup>
-              <ControlLabel>Car Year: </ControlLabel>
+              <ControlLabel>Year: </ControlLabel>
                 <FormControl
                   type="text" placeholder="Enter Car Year"
                   name="carYear" defaultValue={props.todoData.carYear}
@@ -72,9 +72,9 @@ const TodoEditForm = (props) => {
 
 
         {/* Key Type */}
-        <div className="col-md-12">
+        <div className="col-md-6">
           <FormGroup>
-            <ControlLabel>Key Type: </ControlLabel>
+            <ControlLabel>Key: </ControlLabel>
               <FormControl
                 type="text" placeholder="Enter Key Type"
                 name="keyType" defaultValue={props.todoData.keyType}
@@ -85,12 +85,34 @@ const TodoEditForm = (props) => {
 
 
         {/* Transponder Type */}
-        <div className="col-md-12">
+        <div className="col-md-6">
           <FormGroup>
-            <ControlLabel>Transponder Type : </ControlLabel>
+            <ControlLabel>Transponder: </ControlLabel>
               <FormControl
                 type="text" placeholder="Enter Transponder Type"
                 name="transponderType" defaultValue={props.todoData.transponderType}
+              />              
+          </FormGroup>
+        </div>
+
+        {/* Transponder Type */}
+        <div className="col-md-6">
+          <FormGroup>
+            <ControlLabel>PIN #: </ControlLabel>
+              <FormControl
+                type="text" placeholder="Enter PIN Number"
+                name="pinNumber" defaultValue={props.todoData.pinNumber}
+              />              
+          </FormGroup>
+        </div>
+
+        {/* Transponder Type */}
+        <div className="col-md-6">
+          <FormGroup>
+            <ControlLabel>Key Code: </ControlLabel>
+              <FormControl
+                type="text" placeholder="Enter Key Code"
+                name="keyCode" defaultValue={props.todoData.keyCode}
               />              
           </FormGroup>
         </div>
@@ -99,19 +121,19 @@ const TodoEditForm = (props) => {
 
         {/* File 1 */}
         <div className="col-md-4">        
-          <ControlLabel>File 1 </ControlLabel>
+          <ControlLabel>Image</ControlLabel>
           <input id="uploadFile" type="file" name="uploadFile" />        
         </div>
 
         {/* File 2 */}
         <div className="col-md-4">        
-          <ControlLabel>File 2 </ControlLabel>
+          <ControlLabel>Module Location</ControlLabel>
           <input id="uploadFile2" type="file" name="uploadFile2" />                  
         </div>
 
         {/* File 3 */}
         <div className="col-md-4">        
-          <ControlLabel>File 3 </ControlLabel>
+          <ControlLabel>BIM File</ControlLabel>
           <input id="uploadFile3" type="file" name="uploadFile3" />                  
         </div>
 

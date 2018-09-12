@@ -51,15 +51,42 @@ export default class App extends React.Component {
     if(!emptyFile || !emptyFile2 || !emptyFile3) {   
       
       //Customer VIM # 
-      formData.append('vimNumber', form.vimNumber.value.trim().toUpperCase());             
+      formData.append('vimNumber', form.vimNumber.value.trim().toUpperCase());  
       
-      this.props.mappedAddImage(formData,stringData)               
+      //Load files to server
+      fetch("/api/upload", {
+        method:'POST',
+        body: formData,
+      }).then(response => {
+    
+        if(response.ok){
+          response.json().then(data => {
+            
+            console.log(data);                    
+              
+            stringData.append('path1', data.pathArray[0]);
+            stringData.append('path2', data.pathArray[1]);
+            stringData.append('path3', data.pathArray[2]);
+  
+            console.log(stringData)
+            console.log("terminaron de cargar las imagenes")
+  
+            this.props.mappedAddTodo(stringData);              
+            
+          })
+        }
+        else{
+          response.json().then(error => {
+            console.log("ERROR CARGANDO IMAGENES")
+            alert("Error trying to upload files")
+            this.props.mappedAddTodo(stringData);
+          })
+        }
+      })                        
     
     } else {      
       this.props.mappedAddTodo(stringData);
     }
-    
-
   }
 
   addTodo(e){
@@ -68,7 +95,7 @@ export default class App extends React.Component {
       const form = document.getElementById('addTodoForm');                
 
       // Validate VIM # 
-      if(form.vimNumber.value !== "" && form.vimNumber.value.trim().length >= 2){
+      if(form.vimNumber.value !== "" && form.vimNumber.value.trim().length == 17){
         
         const stringData = new FormData();
                 
@@ -79,6 +106,8 @@ export default class App extends React.Component {
         stringData.append('carYear', form.carYear.value);
         stringData.append('keyType', form.keyType.value.toUpperCase());
         stringData.append('transponderType', form.transponderType.value.toUpperCase());
+        stringData.append('pinNumber', form.pinNumber.value.toUpperCase());
+        stringData.append('keyCode', form.keyCode.value.toUpperCase());
         stringData.append('description', form.description.value);                                
 
         this.addImage(stringData)  
@@ -86,7 +115,7 @@ export default class App extends React.Component {
       form.reset();
       }
       else{
-        alert("Error VIM #")
+        alert("Error in VIM #")
         return ;
       }
   }
