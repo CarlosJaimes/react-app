@@ -56,18 +56,18 @@ export default class Todo extends React.Component {
             <h2>Files</h2>
 
             {todoState.todo.path1 != 'undefined' &&
-            <img src={"/var/www/reactApp/express-server/public/" + todoState.todo.path1} height="200" width="200"/>
+            <img src={"http://localhost:3001/public/" + todoState.todo.path1} height="200" width="200"/>
             // <img src={"/Users/Carlos/Repositorios/ReactApp/express-server/public/" + todoState.todo.path1} height="200" width="200"/>
             }
 
 
             {todoState.todo.path2 != 'undefined' &&
-            <img src={"/var/www/reactApp/express-server/public/" + todoState.todo.path2} height="200" width="200"/>
+            <img src={"http://localhost:3001/public/" + todoState.todo.path2} height="200" width="200"/>
             // <img src={"/Users/Carlos/Repositorios/ReactApp/express-server/public/" + todoState.todo.path2} height="200" width="200"/>
             }
 
             {todoState.todo.path3 != 'undefined' &&
-            <img src={"/var/www/reactApp/express-server/public/" + todoState.todo.path3} height="200" width="200"/>
+            <img src={"http://localhost:3001/public/" + todoState.todo.path3} height="200" width="200"/>
             // <img src={"/Users/Carlos/Repositorios/ReactApp/express-server/public/" + todoState.todo.path3} height="200" width="200"/>
             }
 
