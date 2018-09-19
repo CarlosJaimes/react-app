@@ -16,8 +16,6 @@ import todoRoutes from './routes/todo.server.route';
 // define our app using express
 const app = express();
 
-
-const frontEndDir = '/Users/Carlos/Repositorios/ReactApp/react-redux-client/public'
 // express-busboy to parse multipart/form-data
 // bb.extend(app);
 
@@ -79,7 +77,7 @@ app.post('/api/upload', (req,res) => {
 
   //Create folder to customer VIM# files
   var fs = require('fs');
-  var dir = `/Users/Carlos/Repositorios/ReactApp/react-redux-client/public/${customerVIM}/`;
+  var dir = `${__dirname}/public/${customerVIM}/`;
 
   if (!fs.existsSync(dir)){
       fs.mkdirSync(dir);
@@ -91,8 +89,8 @@ app.post('/api/upload', (req,res) => {
     file = req.files[key];
     fileExtension = file.name.split('.').pop();         
 
-    //file.mv(`${__dirname}/public/${req.body.filename[i]}.${fileExtension}`, function(err) {
-    file.mv(`/Users/Carlos/Repositorios/ReactApp/react-redux-client/public/${customerVIM}/${req.body.filename[i]}.${fileExtension}`, function(err) {
+    // file.mv(`/var/www/reactApp/react-redux-client/public/${customerVIM}/${req.body.filename[i]}.${fileExtension}`, function(err) {
+    file.mv(`${__dirname}/public/${customerVIM}/${req.body.filename[i]}.${fileExtension}`, function(err) {    
     
       if (err) {
         console.log(err);

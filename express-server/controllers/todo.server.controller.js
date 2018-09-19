@@ -76,8 +76,8 @@ export const deleteTodo = (req,res) => {
     return res.json({'success':false,'message':'Some Error'});
     }
 
-    //Delete customer VIM # folder files
-    var dir = `/Users/Carlos/Repositorios/ReactApp/react-redux-client/public/${todo.vimNumber}/`;    
+    //Delete customer VIM # folder files    
+    var dir = `${__dirname}/public/${todo.vimNumber}/`;  
 
     rimraf(dir, function (error) { 
       if (error) {
