@@ -1,6 +1,6 @@
 // ./react-redux-client/src/components/App.js
 import React from 'react';
-import { Navbar,Nav,NavItem } from 'react-bootstrap';
+import { Navbar,Nav,NavItem,ProgressBar } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import './App.css';
 import TodoForm from './TodoForm';
@@ -13,6 +13,13 @@ export default class App extends React.Component {
     this.toggleAddTodo = this.toggleAddTodo.bind(this);
     this.addTodo = this.addTodo.bind(this);
     this.addImage = this.addImage.bind(this);    
+    this.getValidationState = this.getValidationState.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+
+    this.state = {
+      value: ''
+    };
+    
   }
 
   toggleAddTodo(e){
@@ -20,6 +27,28 @@ export default class App extends React.Component {
      this.props.mappedToggleAddTodo();
   }
 
+  //VIM # VALIDATION
+  getValidationState() {              
+    const length = this.state.value.length;
+
+    if (length == 17) return 'success';    
+    
+    else if (length > 17) {      
+      alert("INVALID VIM NUMBER (ONLY 17 CHARACTERES)")
+      return 'error'; 
+    }
+
+    else if (length > 10) return 'warning';  
+    
+    else if (length > 0) return 'error';     
+
+    return 'error';  
+
+  }
+
+  handleChange(e) {        
+    this.setState({ value: e.target.value });                  
+  }
 
   addImage(stringData){        
 
@@ -51,10 +80,13 @@ export default class App extends React.Component {
     if(!emptyFile || !emptyFile2 || !emptyFile3) {   
       
       //Customer VIM # 
-      formData.append('vimNumber', form.vimNumber.value.trim().toUpperCase());  
-      
+      formData.append('vimNumber', form.vimNumber.value.trim().toUpperCase());              
+
+      alert("Loading Files...")
+
       //Load files to server
-      fetch("/api/upload", {
+      // fetch("/api/upload", {
+      fetch("http://app.thelocksmithrescue.com:3001/api/upload", {      
         method:'POST',
         body: formData,
       }).then(response => {
@@ -62,7 +94,8 @@ export default class App extends React.Component {
         if(response.ok){
           response.json().then(data => {
             
-            console.log(data);                    
+            console.log(data);       
+            alert("Files uploaded successfully")             
               
             stringData.append('path1', data.pathArray[0]);
             stringData.append('path2', data.pathArray[1]);
@@ -77,7 +110,7 @@ export default class App extends React.Component {
         }
         else{
           response.json().then(error => {
-            console.log("ERROR CARGANDO IMAGENES")
+            console.log("Error loading files")
             alert("Error trying to upload files")
             this.props.mappedAddTodo(stringData);
           })
@@ -115,7 +148,7 @@ export default class App extends React.Component {
       form.reset();
       }
       else{
-        alert("Error in VIM #")
+        alert("INVALID VIM NUMBER (ONLY 17 CHARACTERES)")
         return ;
       }
   }
@@ -147,7 +180,7 @@ export default class App extends React.Component {
   <div className="container">
 
   {appState.showAddTodo &&
-    <TodoForm addTodo={this.addTodo} addImage={this.addImage.bind(this)}/>
+    <TodoForm addTodo={this.addTodo} handleChange={this.handleChange} getValidationState={this.getValidationState} />
   }
 
   { /* Each Smaller Components */}

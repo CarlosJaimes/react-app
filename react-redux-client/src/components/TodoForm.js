@@ -8,10 +8,7 @@ const TodoForm = (props) => {
       
       <div className="row">
 
-        <h3 className="centerAlign">Add New Item</h3>
-
-
-    {/*  */}
+        <h3 className="centerAlign">Add New Item</h3>    
 
         {/* CUSTOMER NAME */}
         <div className="col-md-12">
@@ -22,17 +19,21 @@ const TodoForm = (props) => {
                 name="customerName"
               />              
           </FormGroup>
-        </div>
-        
+        </div>               
 
         {/* VIM # */}
         <div className="col-md-12">
-          <FormGroup>
+          <FormGroup
+          controlId="formBasicText"                    
+          validationState={props.getValidationState()}     
+          >
             <ControlLabel>VIM #: </ControlLabel>
               <FormControl
                 type="text" placeholder="Enter VIM #"
                 name="vimNumber" maxlength="17"
-              />              
+                onChange={props.handleChange}
+              />      
+              <FormControl.Feedback />             
           </FormGroup>
         </div>                        
         

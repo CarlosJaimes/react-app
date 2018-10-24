@@ -1,9 +1,17 @@
 // ./react-redux-client/src/actions/todoActions.js
 
-const apiUrl = "/api/";
-const apiUrlImage = "/api/upload";
+const apiUrl = "http://app.thelocksmithrescue.com:3001/api/";
+const apiUrlImage = "http://app.thelocksmithrescue.com:3001/api/upload";
+// const apiUrl = "/api/";
+// const apiUrlImage = "/api/upload";
 
 export const toggleAddBook = () => {
+  return {
+    type: 'TOGGLE_ADD_TODO'
+  }
+}
+
+export const toggleAddTodo = () => {
   return {
     type: 'TOGGLE_ADD_TODO'
   }
@@ -84,6 +92,7 @@ export const addNewTodo = (todo) => {
       if(response.ok){
         response.json().then(data => {
           console.log(data.todo);
+          dispatch(toggleAddTodo())
           dispatch(addNewTodoRequestSuccess(data.todo, data.message))
         })
       }

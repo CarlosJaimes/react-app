@@ -6,6 +6,18 @@ export default class Todo extends React.Component {
     this.props.mappedfetchTodoById(this.props.params.id);
   }
 
+  openWindows1(){            
+    window.open(document.getElementById('button1').value)
+  }
+
+  openWindows2(){            
+    window.open(document.getElementById('button2').value)
+  }
+
+  openWindows3(){            
+    window.open(document.getElementById('button3').value)
+  }
+
   render(){
     
     const todoState = this.props.mappedTodoState;
@@ -55,20 +67,20 @@ export default class Todo extends React.Component {
             <hr/>          
             <h2>Files</h2>
 
-            {todoState.todo.path1 != 'undefined' &&
-            <img src={"http://localhost:3001/public/" + todoState.todo.path1} height="200" width="200"/>
-            // <img src={"/Users/Carlos/Repositorios/ReactApp/express-server/public/" + todoState.todo.path1} height="200" width="200"/>
+            {todoState.todo.path1 != 'undefined' &&            
+            <button id="button1" type="button" value={"http://app.thelocksmithrescue.com:3001/public/" + todoState.todo.path1} onClick={this.openWindows1}>File 1</button>
+            //<button id="button1" type="button" value={"http://localhost:3001/public/" + todoState.todo.path1} onClick={this.openWindows1}>File 1</button>
             }
 
 
-            {todoState.todo.path2 != 'undefined' &&
-            <img src={"http://localhost:3001/public/" + todoState.todo.path2} height="200" width="200"/>
-            // <img src={"/Users/Carlos/Repositorios/ReactApp/express-server/public/" + todoState.todo.path2} height="200" width="200"/>
+            {todoState.todo.path2 != 'undefined' &&          
+            <button id="button2" type="button" value={"http://app.thelocksmithrescue.com:3001/public/" + todoState.todo.path2} onClick={this.openWindows2}>File 2</button>
+            //<button id="button2" type="button" value={"http://localhost:3001/public/" + todoState.todo.path2} onClick={this.openWindows2}>File 2</button>
             }
 
-            {todoState.todo.path3 != 'undefined' &&
-            <img src={"http://localhost:3001/public/" + todoState.todo.path3} height="200" width="200"/>
-            // <img src={"/Users/Carlos/Repositorios/ReactApp/express-server/public/" + todoState.todo.path3} height="200" width="200"/>
+            {todoState.todo.path3 != 'undefined' &&            
+            <button id="button3" type="button" value={"http://app.thelocksmithrescue.com:3001/public/" + todoState.todo.path3} onClick={this.openWindows3}>File 3</button>
+            //<button id="button3" type="button" value={"http://localhost:3001/public/" + todoState.todo.path3} onClick={this.openWindows3}>File 3</button>
             }
 
             <hr/>           

@@ -11,6 +11,7 @@ export default class Todos extends React.Component {
     this.submitEditTodo = this.submitEditTodo.bind(this);
     this.hideDeleteModal = this.hideDeleteModal.bind(this);
     this.cofirmDeleteTodo = this.cofirmDeleteTodo.bind(this);
+    this.addImage = this.addImage.bind(this);    
   }
 
   componentWillMount(){
@@ -26,6 +27,78 @@ export default class Todos extends React.Component {
      this.props.mappedhideEditModal();
   }
 
+  addImage(stringData){        
+
+    const form = document.getElementById('EditTodoForm');   
+    
+    const formData = new FormData();    
+    var emptyFile = true
+    var emptyFile2 = true
+    var emptyFile3 = true    
+
+    if(form.uploadFile.files[0] != null) {             
+      formData.append("file", form.uploadFile.files[0]);
+      formData.append('filename', "file1");        
+      emptyFile = false      
+    }        
+
+    if(form.uploadFile2.files[0] != null) {            
+      formData.append("file2", form.uploadFile2.files[0]);
+      formData.append('filename', "file2");    
+      emptyFile2 = false      
+    }
+
+    if(form.uploadFile3.files[0] != null) {            
+      formData.append("file3", form.uploadFile3.files[0]);
+      formData.append('filename', "file3");    
+      emptyFile3 = false      
+    }
+
+    if(!emptyFile || !emptyFile2 || !emptyFile3) {   
+      
+      //Customer VIM # 
+      formData.append('vimNumber', form.vimNumber.value.trim().toUpperCase());              
+
+      alert("Loading Files...")
+
+      //Load files to server
+      // fetch("/api/upload", {
+      fetch("http://app.thelocksmithrescue.com:3001/api/upload", {      
+        method:'POST',
+        body: formData,
+      }).then(response => {
+    
+        if(response.ok){
+          response.json().then(data => {
+            
+            console.log(data);       
+            alert("Files uploaded successfully")             
+              
+            stringData.append('path1', data.pathArray[0]);
+            stringData.append('path2', data.pathArray[1]);
+            stringData.append('path3', data.pathArray[2]);
+  
+            console.log(stringData)
+            console.log("terminaron de cargar las imagenes")
+  
+            this.props.mappedEditTodo(stringData);              
+            
+          })
+        }
+        else{
+          response.json().then(error => {
+            console.log("Error loading files")
+            alert("Error trying to upload files")
+            this.props.mappedEditTodo(stringData);
+          })
+        }
+      })                        
+    
+    } else {      
+      this.props.mappedEditTodo(stringData);      
+    }
+  }
+
   submitEditTodo(e){
     e.preventDefault();
     
@@ -37,18 +110,20 @@ export default class Todos extends React.Component {
       
       data.append('id', editForm.id.value);      
       data.append('vimNumber', editForm.vimNumber.value.trim().toUpperCase());
-      data.append('customerName', editForm.customerName.value);
+      data.append('customerName', editForm.customerName.value.toUpperCase());
       data.append('carMake', editForm.carMake.value.toUpperCase());
       data.append('carModel', editForm.carModel.value.toUpperCase());
       data.append('carYear', editForm.carYear.value);
-      data.append('keyType', editForm.keyType.value);
-      data.append('transponderType', editForm.transponderType.value);
+      data.append('keyType', editForm.keyType.value.toUpperCase());      
+      data.append('transponderType', editForm.transponderType.value.toUpperCase());      
+      data.append('pinNumber', editForm.pinNumber.value.toUpperCase());
+      data.append('keyCode', editForm.keyCode.value.toUpperCase());
       data.append('description', editForm.description.value);
       
-      this.props.mappedEditTodo(data);
+      this.addImage(data)        
     }
     else{
-      alert("Error VIM #")
+      alert("INVALID VIM NUMBER (ONLY 17 CHARACTERES)")
       return;
     }
 
