@@ -38,8 +38,9 @@ export const addTodo = (req,res) => {
   console.log(req.body);
   const newTodo = new Todo(req.body);
   newTodo.save((err,todo) => {
-    if(err){
-    return res.json({'success':false,'message':'Some Error'});
+    
+    if(err){            
+      return res.json({'success':false,'message':'Some Error','error':err});
     }
 
     return res.json({'success':true,'message':'Todo added successfully',todo});

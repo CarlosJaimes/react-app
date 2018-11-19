@@ -5,7 +5,11 @@ var Schema = mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  vimNumber: String,
+  vimNumber: {
+    type: String,
+    unique: true,
+    require: true
+  },    
   customerName: String,  
   carMake: String,
   carModel: String,
@@ -15,9 +19,7 @@ var Schema = mongoose.Schema({
   pinNumber: String,
   keyCode: String,    
   description: String,
-  path1: String,
-  path2: String,
-  path3: String
+  path: [String]
 });
 
 export default mongoose.model('Todo', Schema);

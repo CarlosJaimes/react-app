@@ -69,6 +69,7 @@ app.post('/api/upload', (req,res) => {
 
   var file;
   var fileExtension;  
+  var fileName;
   var i = 0  
   
   let customerVIM = req.body.vimNumber
@@ -81,16 +82,16 @@ app.post('/api/upload', (req,res) => {
 
   if (!fs.existsSync(dir)){
       fs.mkdirSync(dir);
-  }  
+  }            
 
   //Loop for files
-  for (var key in req.files) {    
-    
-    file = req.files[key];
-    fileExtension = file.name.split('.').pop();         
+  for (var key in req.files) {                   
 
-    // file.mv(`/var/www/reactApp/react-redux-client/public/${customerVIM}/${req.body.filename[i]}.${fileExtension}`, function(err) {
-    file.mv(`${__dirname}/public/${customerVIM}/${req.body.filename[i]}.${fileExtension}`, function(err) {    
+    file = req.files[key];
+    fileName = req.body.filename[i];
+    fileExtension = file.name.split('.').pop();              
+
+    file.mv(`${__dirname}/public/${customerVIM}/${fileName}.${fileExtension}`, function(err) {    
     
       if (err) {
         console.log(err);
@@ -101,15 +102,17 @@ app.post('/api/upload', (req,res) => {
       console.log('File uploaded!');             
       
     });
+  
+    pathArray.push(`${customerVIM}/${fileName}.${fileExtension}`);
 
-    //pathArray.push(`${__dirname}/public/${req.body.filename[i]}.${fileExtension}`)
-    pathArray.push(`${customerVIM}/${req.body.filename[i]}.${fileExtension}`)    
+    i = i + 1;
+  }  
 
-    i = i + 1
-  }
+  var body = req.body.filename;
 
-  return res.json({'success':true,'message':'File added successfully',pathArray});      
+  return res.json({'success':true,'message':'File added successfully',pathArray,body});      
 
+  
 });
   
 

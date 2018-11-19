@@ -126,19 +126,19 @@ const TodoForm = (props) => {
         {/* File 1 */}
         <div className="col-md-4">        
           <ControlLabel>Image</ControlLabel>
-          <input id="uploadFile" type="file" name="uploadFile" />        
+          <input id="uploadFile" type="file" name="uploadFile" multiple="multiple"/>        
         </div>
 
         {/* File 2 */}
         <div className="col-md-4">        
           <ControlLabel>Module Location</ControlLabel>
-          <input id="uploadFile2" type="file" name="uploadFile2" />                  
+          <input id="uploadFile2" type="file" name="uploadFile2" multiple="multiple"/>                  
         </div>
 
         {/* File 3 */}
         <div className="col-md-4">        
           <ControlLabel>BIM File</ControlLabel>
-          <input id="uploadFile3" type="file" name="uploadFile3" />                  
+          <input id="uploadFile3" type="file" name="uploadFile3" multiple="multiple"/>                  
         </div>
 
 

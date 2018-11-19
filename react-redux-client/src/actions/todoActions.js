@@ -28,14 +28,16 @@ export const addNewImage = (imageData,stringData) => {
     }).then(response => {
   
       if(response.ok){
-        response.json().then(data => {
+        response.json().then(data => {         
           
-          console.log(data);                    
-
           // If server response ok the images are saved then save the path
-          stringData.append('path1', data.pathArray[0]);
-          stringData.append('path2', data.pathArray[1]);
-          stringData.append('path3', data.pathArray[2]);
+          var i = 0;
+          var split = data.body.split(',');          
+
+          for (var key in split) {            
+            stringData.append(split[key], data.pathArray[i]);
+            i = i +1;
+          }
 
           dispatch(addNewTodo(stringData));
 
@@ -89,14 +91,20 @@ export const addNewTodo = (todo) => {
           body: todo,
     }).then(response => {
 
-      if(response.ok){
-        response.json().then(data => {
-          console.log(data.todo);
+      if(response.ok){        
+
+        response.json().then(data => {                    
+          if (!data.success) {
+            alert("ERROR: " + data.error.errmsg)
+            return
+          }
+
           dispatch(toggleAddTodo())
           dispatch(addNewTodoRequestSuccess(data.todo, data.message))
         })
       }
       else{
+        alert("ERROR")
         response.json().then(error => {
           dispatch(addNewTodoRequestFailed(error))
         })

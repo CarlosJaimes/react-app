@@ -6,17 +6,9 @@ export default class Todo extends React.Component {
     this.props.mappedfetchTodoById(this.props.params.id);
   }
 
-  openWindows1(){            
-    window.open(document.getElementById('button1').value)
-  }
-
-  openWindows2(){            
-    window.open(document.getElementById('button2').value)
-  }
-
-  openWindows3(){            
-    window.open(document.getElementById('button3').value)
-  }
+  openWindows(e){       
+    window.open(e.target.value)
+  }  
 
   render(){
     
@@ -65,23 +57,12 @@ export default class Todo extends React.Component {
             <p>{todoState.todo.description}</p>
 
             <hr/>          
-            <h2>Files</h2>
+            <h2>Files</h2>      
 
-            {todoState.todo.path1 != 'undefined' &&            
-            <button id="button1" type="button" value={"http://app.thelocksmithrescue.com:3001/public/" + todoState.todo.path1} onClick={this.openWindows1}>File 1</button>
-            //<button id="button1" type="button" value={"http://localhost:3001/public/" + todoState.todo.path1} onClick={this.openWindows1}>File 1</button>
-            }
-
-
-            {todoState.todo.path2 != 'undefined' &&          
-            <button id="button2" type="button" value={"http://app.thelocksmithrescue.com:3001/public/" + todoState.todo.path2} onClick={this.openWindows2}>File 2</button>
-            //<button id="button2" type="button" value={"http://localhost:3001/public/" + todoState.todo.path2} onClick={this.openWindows2}>File 2</button>
-            }
-
-            {todoState.todo.path3 != 'undefined' &&            
-            <button id="button3" type="button" value={"http://app.thelocksmithrescue.com:3001/public/" + todoState.todo.path3} onClick={this.openWindows3}>File 3</button>
-            //<button id="button3" type="button" value={"http://localhost:3001/public/" + todoState.todo.path3} onClick={this.openWindows3}>File 3</button>
-            }
+            {todoState.todo.path.map((todo,i) =>                     
+            <button id="button" type="button" value={"http://app.thelocksmithrescue.com:3001/public/" + todo} onClick={this.openWindows}>File {todo.split('/')[1].split('file')[1]}</button>
+            // <button id="button" type="button" value={"http://localhost:3001/public/" + todo} onClick={this.openWindows}>File {todo.split('/')[1].split('file')[1]}</button>
+          )}                    
 
             <hr/>           
 

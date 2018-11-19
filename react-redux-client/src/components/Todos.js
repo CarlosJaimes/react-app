@@ -32,27 +32,39 @@ export default class Todos extends React.Component {
     const form = document.getElementById('EditTodoForm');   
     
     const formData = new FormData();    
-    var emptyFile = true
-    var emptyFile2 = true
-    var emptyFile3 = true    
 
-    if(form.uploadFile.files[0] != null) {             
-      formData.append("file", form.uploadFile.files[0]);
-      formData.append('filename', "file1");        
-      emptyFile = false      
-    }        
+    var i;
+    var emptyFile = true;
+    var emptyFile2 = true;
+    var emptyFile3 = true;               
 
-    if(form.uploadFile2.files[0] != null) {            
-      formData.append("file2", form.uploadFile2.files[0]);
-      formData.append('filename', "file2");    
-      emptyFile2 = false      
+    let file1 = form.uploadFile.files;
+    let file2 = form.uploadFile2.files;
+    let file3 = form.uploadFile3.files;
+    
+    for(i=0; i<file1.length; i++) {      
+
+      formData.append("file1-"+i, file1[i]);
+      formData.append('filename', "file1-"+i);        
+      emptyFile = false     
+
     }
 
-    if(form.uploadFile3.files[0] != null) {            
-      formData.append("file3", form.uploadFile3.files[0]);
-      formData.append('filename', "file3");    
-      emptyFile3 = false      
+    for(i=0; i<file2.length; i++) {      
+
+      formData.append("file2-"+i, file2[i]);
+      formData.append('filename', "file2-"+i);  
+      emptyFile2 = false
+
     }
+
+    for(i=0; i<file3.length; i++) {    
+      
+      formData.append("file3-"+i, file3[i]);
+      formData.append('filename', "file3-"+i);    
+      emptyFile3 = false 
+
+    }     
 
     if(!emptyFile || !emptyFile2 || !emptyFile3) {   
       
@@ -72,11 +84,14 @@ export default class Todos extends React.Component {
           response.json().then(data => {
             
             console.log(data);       
-            alert("Files uploaded successfully")             
-              
-            stringData.append('path1', data.pathArray[0]);
-            stringData.append('path2', data.pathArray[1]);
-            stringData.append('path3', data.pathArray[2]);
+            alert("Files uploaded successfully");                               
+
+            var i = 0;            
+
+            for (var key in data.body) {               
+              stringData.append("path", data.pathArray[i]);
+              i = i +1;
+            }
   
             console.log(stringData)
             console.log("terminaron de cargar las imagenes")
