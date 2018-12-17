@@ -66,19 +66,19 @@ export default class Todo extends React.Component {
 
             {/* DEPRECATE */}
             {todoState.todo.path1 != 'undefined' &&            
-            <button id="button1" type="button" value={"http://app.thelocksmithrescue.com:3001/public/" + todoState.todo.path1} onClick={this.openWindows1}>File 1</button>
-            // <button id="button1" type="button" value={"http://localhost:3001/public/" + todoState.todo.path1} onClick={this.openWindows1}>File 1</button>
+            <button id="button1" type="button" value={"http://app.thelocksmithrescue.com:3001/public/" + todoState.todo.path1} onClick={this.openWindows}>File 1</button>
+            // <button id="button1" type="button" value={"http://localhost:3001/public/" + todoState.todo.path1} onClick={this.openWindows}>File 1</button>
             }
 
 
             {todoState.todo.path2 != 'undefined' &&          
-            <button id="button2" type="button" value={"http://app.thelocksmithrescue.com:3001/public/" + todoState.todo.path2} onClick={this.openWindows2}>File 2</button>
-            // <button id="button2" type="button" value={"http://localhost:3001/public/" + todoState.todo.path2} onClick={this.openWindows2}>File 2</button>
+            <button id="button2" type="button" value={"http://app.thelocksmithrescue.com:3001/public/" + todoState.todo.path2} onClick={this.openWindows}>File 2</button>
+            // <button id="button2" type="button" value={"http://localhost:3001/public/" + todoState.todo.path2} onClick={this.openWindows}>File 2</button>
             }                          
  
             {todoState.todo.path3 != 'undefined' &&            
-            <button id="button3" type="button" value={"http://app.thelocksmithrescue.com:3001/public/" + todoState.todo.path3} onClick={this.openWindows3}>File 3</button>
-            // <button id="button3" type="button" value={"http://localhost:3001/public/" + todoState.todo.path3} onClick={this.openWindows3}>File 3</button>
+            <button id="button3" type="button" value={"http://app.thelocksmithrescue.com:3001/public/" + todoState.todo.path3} onClick={this.openWindows}>File 3</button>
+            // <button id="button3" type="button" value={"http://localhost:3001/public/" + todoState.todo.path3} onClick={this.openWindows}>File 3</button>
             }
 
 
